@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>Back40 Print Flier - Basecamp Deep Dive</title>
+    <style>
+        :root {
+            --trail-green: #4A7C59;
+            --deep-timber: #2C3E2D;
+            --campfire: #B5631A;
+            --dry-grass: #C8AA6E;
+            --canvas: #F4F0E6;
+        }
+
+        @page {
+            size: letter;
+            margin: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--canvas);
+            color: var(--deep-timber);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* HERO SECTION - Based on Image_c6d17f.png */
+        .hero {
+            background-color: var(--deep-timber);
+            background-image: linear-gradient(rgba(44, 62, 45, 0.75), rgba(44, 62, 45, 0.75)), url('https://raw.githubusercontent.com/B40-ADMIN/B40-First-repo/09ec8e95ec4a27b1f6c02709432b7681f1a06765/IMG_4429.JPG');
+            background-size: cover;
+            background-position: center 50%;
+            color: white;
+            padding: 50px 35px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 46px;
+            margin: 0;
+            font-weight: 700;
+            line-height: 1.1;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero h1 span { color: var(--dry-grass); }
+
+        .hero p {
+            font-size: 15px;
+            margin-top: 14px;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
+        /* TRUST STRIP */
+        .trust-strip {
+            background-color: var(--trail-green);
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        /* MAIN CONTENT AREA */
+        .content { padding: 22px 40px; }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 18px;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+            margin: 0;
+            color: var(--deep-timber);
+        }
+
+        .section-header h2 span {
+            color: var(--dry-grass);
+            font-style: italic;
+            display: block;
+            font-size: 24px;
+            margin-bottom: -5px;
+        }
+
+        .disclaimer-badge {
+            background-color: #E8E4D8;
+            border-left: 4px solid var(--campfire);
+            padding: 10px 15px;
+            font-size: 12px;
+            max-width: 250px;
+        }
+
+        /* INVENTORY GRID - Based on Image_c6d900.png */
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .category-card {
+            background: #FFFFFF;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .category-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        .category-icon {
+            width: 28px;
+            height: 28px;
+            background: var(--trail-green);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+
+        .category-label h3 {
+            margin: 0;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .item-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 7px 0;
+            font-size: 13px;
+            border-bottom: 1px solid #FAFAFA;
+        }
+
+        .item-name { display: flex; align-items: center; gap: 8px; }
+        .item-name::before {
+            content: "•";
+            color: var(--trail-green);
+            font-weight: bold;
+        }
+
+        .item-qty {
+            background: #F4F4F4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            color: #777;
+        }
+
+        /* CTA SECTION */
+        .cta-box {
+            background-color: var(--deep-timber);
+            color: white;
+            padding: 18px 28px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            page-break-inside: avoid;
+        }
+
+        .cta-text { flex-grow: 1; }
+        .cta-text h4 { margin: 0 0 5px 0; color: var(--dry-grass); font-size: 24px; font-family: 'Playfair Display', serif;}
+        .cta-text p { margin: 0; font-size: 13px; line-height: 1.4; opacity: 0.9; }
+
+        .qr-placeholder {
+            min-width: 90px;
+            height: 90px;
+            background: white;
+            border: 3px solid var(--trail-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            text-align: center;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 10px;
+            margin-top: 12px;
+            color: var(--trail-green);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <h1>Gear up. <span>Get out.</span> Get Dirty</h1>
+        <p>Premium rental kits delivered to your door or campsite. High-end cottage industry gear without the gear closet clutter.</p>
+    </div>
+
+    <div class="trust-strip">
+        <div>Free Local Delivery</div>
+        <div>Cleaned & Inspected</div>
+        <div>Cottage Industry Gear</div>
+    </div>
+
+    <div class="content">
+        <div class="section-header">
+            <h2><span>What's in</span>The Basecamp.</h2>
+            <div class="disclaimer-badge">
+                ⚠️ <strong>Note:</strong> Sleeping bags & pads are not included. Guests provide their own.
+            </div>
+        </div>
+
+        <div class="inventory-grid">
+            <div class="category-card">
+                <div class="category-label">
+                    <div class="category-icon">⌂</div>
+                    <h3>Shelter</h3>
+                </div>
+                <div class="item-list">
+                    <div class="item-row"><span class="item-name">6-Person Tunnel Tent with Screened Porch</span> <span class="item-qty">×1</span></div>
+                    <div class="item-row"><span class="item-name">Tent Carpet Mat</span> <span class="item-qty">×2</span></div>
+                </div>
+            </div>
+
+            <div class="category-card">
+                <div class="category-label">
+                    <div class="category-icon">☼</div>
+                    <h3>Lighting</h3>
+                </div>
+                <div class="item-list">
+                    <div class="item-row"><span class="item-name">Rechargeable Flashlight</span> <span class="item-qty">×1</span></div>
+                    <div class="item-row"><span class="item-name">Headlamp</span> <span class="item-qty">×1</span></div>
+                    <div class="item-row"><span class="item-name">Glow Markers</span> <span class="item-qty">1 set</span></div>
+                </div>
+            </div>
+
+            <div class="category-card">
+                <div class="category-label">
+                    <div class="category-icon">☕</div>
+                    <h3>Camp Kitchen</h3>
+                </div>
+                <div class="item-list">
+                    <div class="item-row"><span class="item-name">Camp Stove</span> <span class="item-qty">×1</span></div>
+                    <div class="item-row"><span class="item-name">Cookware (pan)</span> <span class="item-qty">×1</span></div>
+                    <div class="item-row"><span class="item-name">Stainless Coffee Percolator</span> <span class="item-qty">×1</span></div>
+                    <div class="item-row"><span class="item-name">Mugs / Cups</span> <span class="item-qty">×2</span></div>
+                </div>
+            </div>
+
+            <div class="category-card">
+                <div class="category-label">
+                    <div class="category-icon">♡</div>
+                    <h3>Camp Comfort</h3>
+                </div>
+                <div class="item-list">
+                    <div class="item-row"><span class="item-name">Camp Chair</span> <span class="item-qty">×2</span></div>
+                    <div class="item-row"><span class="item-name">Local Delivery</span> <span class="item-qty">INC</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-box">
+            <div class="cta-text">
+                <h4>Ready to Get out?</h4>
+                <p>The outdoors shouldn't cost you a second mortgage. Scan the code to view availability and book your gear online.</p>
+                <div style="margin-top:10px; font-weight:700; font-size: 15px;">back40utfitters.com</div>
+            </div>
+            <div class="qr-placeholder">
+                SCAN TO<br>BOOK
+            </div>
+        </div>
+
+        <div class="footer">
+            Back40utfitters · Fort Smith, AR
+        </div>
+    </div>
+
+</body>
+</html>
